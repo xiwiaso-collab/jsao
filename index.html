@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>168miami - รับฟรี 100</title>
+<style>
+  :root{--card-width:420px;}
+  body{margin:0;background:#87a7d6;font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:center;align-items:flex-start;padding:40px 10px;}
+  .card{width:var(--card-width);background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.15);overflow:hidden;}
+  .hero img{width:100%;display:block;}
+  .content{padding:16px;text-align:center;}
+  h1{font-size:18px;margin:8px 0 12px;color:#111;}
+  .btn{display:block;width:84%;margin:10px auto;padding:14px;border-radius:10px;text-decoration:none;color:#fff;font-weight:700;font-size:16px;}
+  .green{background:#10BF11;}
+  .dark{background:#222;}
+  .note{font-size:13px;color:#666;margin-bottom:18px;}
+</style>
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <main class="card" role="main">
+    <div class="hero"><img src="banner.gif" alt="168miami โปรโมชัน"></div>
+    <div class="content">
+      <h1>168miami แจกฟรี 100 บาท</h1>
+      <a class="btn green" href="https://t.ly/wOTp9" target="_blank" rel="noopener">รับฟรี 100 คลิ๊ก!!!</a>
+      <a class="btn dark" href="https://t.ly/kP8BK" target="_blank" rel="noopener">&gt; สมัครสมาชิก &lt;</a>
+      <button id="shareBtn" class="btn dark" type="button">แชร์ให้เพื่อน</button>
+      <p class="note">(เปิดหน้านี้ในแอป LINE เพื่อกดแชร์เป็น Flex Message)</p>
+    </div>
+  </main>
+
+<script>
+const LIFF_ID = "2007906078-Vpg3OP6o"; // your LIFF ID
+
+// simple LIFF init for shareTargetPicker usage
+async function initLiff(){
+  try{ await liff.init({ liffId: LIFF_ID }); }catch(e){ console.error('LIFF init failed', e); }
+}
+initLiff();
+
+const flex = {
+  "type":"bubble",
+  "hero":{"type":"image","url":location.origin + "/" + "banner.gif","size":"full","aspectRatio":"1:1","aspectMode":"cover"},
+  "body":{"type":"box","layout":"vertical","contents":[{"type":"text","text":"168miami แจกฟรี 100 บาท","weight":"bold","size":"lg","align":"center"}]},
+  "footer":{"type":"box","layout":"vertical","contents":[
+    {"type":"button","action":{"type":"uri","label":"รับฟรี 100 คลิ๊ก!!!","uri":"https://t.ly/wOTp9"},"color":"#10BF11","style":"primary"},
+    {"type":"button","action":{"type":"uri","label":"> สมัครสมาชิก <","uri":"https://t.ly/kP8BK"},"color":"#000000","style":"primary"},
+    {"type":"button","action":{"type":"uri","label":"ดูรายละเอียด","uri":"https://liff.line.me/2007906078-Vpg3OP6o"},"color":"#000000","style":"primary"}
+  ]}
+};
+
+document.getElementById('shareBtn').addEventListener('click', async ()=>{
+  try{
+    if (!window.liff) return alert('โปรดเปิดหน้านี้ในแอป LINE เพื่อแชร์');
+    if (!liff.isInClient()) return alert('กรุณาเปิดในแอป LINE เพื่อใช้ฟีเจอร์แชร์');
+    await liff.shareTargetPicker([{type:'flex', altText:'168miami แจกฟรี 100 บาท', contents:flex}]);
+    alert('ส่งเสร็จแล้ว — ให้ผู้รับตรวจสอบในแชท');
+  }catch(err){
+    console.error(err);
+    alert('เกิดข้อผิดพลาดขณะแชร์');
+  }
+});
+</script>
+</body>
+</html>
